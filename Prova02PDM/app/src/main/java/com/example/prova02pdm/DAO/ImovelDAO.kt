@@ -27,4 +27,19 @@ class ImovelDAO(banco : MyDataBaseHelper) {
         }
         return true
     }
+
+    fun retornarUltimoID(): Int{
+        val db_leitura = this.banco.readableDatabase
+        val cursor = db_leitura.rawQuery("select * from Imovel",null)
+        var ultimoId = 0
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow("id"))
+                ultimoId = id
+                android.util.Log.i("Teste","ID: "+id)
+            }
+        }
+        cursor.close()
+        return ultimoId
+    }
 }

@@ -51,18 +51,15 @@ class MyDataBaseHelper(context: Context) : SQLiteOpenHelper(context, "BancoImobi
         val idLocacao = "id"
         val proprietario = "id_proprietario"
         val imovel = "id_imovel"
-        val locacao = "id_locacao"
         val inquilino = "id_inquilino"
         val SQL_criacao4 =
             "CREATE TABLE ${nomeTabelaLocacao} (" +
                     "${idLocacao} INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "${proprietario} INTEGER," +
                     "${imovel} INTEGER," +
-                    "${locacao} INTEGER," +
                     "${inquilino} INTEGER," +
                     "FOREIGN KEY(${proprietario}) REFERENCES Proprietario(${idProprietario})," +
                     "FOREIGN KEY(${imovel}) REFERENCES Imovel(${idImovel})," +
-                    "FOREIGN KEY(${locacao}) REFERENCES Locacao(${idLocacao})," +
                     "FOREIGN KEY(${inquilino}) REFERENCES Inquilino(${idInquilino}))"
         db.execSQL(SQL_criacao4)
     }
