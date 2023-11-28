@@ -2,6 +2,7 @@ package com.example.prova02pdm.classes
 
 class Inquilino(CPF_inq : String, nome : String, Valor_depositado : Float){
 
+    var id : Int = 0
     var CPF_inq : String
     var nome : String
     var Valor_depositado : Float

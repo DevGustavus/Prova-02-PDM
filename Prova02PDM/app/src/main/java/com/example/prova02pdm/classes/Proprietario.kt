@@ -2,6 +2,7 @@ package com.example.prova02pdm.classes
 
 class Proprietario(CPF_prop : String, nome : String, email : String) {
 
+    var id : Int= 0
     var CPF_prop : String
     var nome : String
     var email : String

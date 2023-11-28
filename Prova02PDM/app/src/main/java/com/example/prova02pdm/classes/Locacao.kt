@@ -4,6 +4,7 @@ class Locacao(proprietario : Proprietario, imovel : Imovel, inquilino : Inquilin
     var proprietario : Proprietario
     var imovel : Imovel
     var inquilino : Inquilino
+    var id : Int = 0
 
     init {
         this.proprietario = proprietario

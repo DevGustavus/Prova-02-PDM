@@ -2,6 +2,7 @@ package com.example.prova02pdm.classes
 
 class Imovel(matricula : String, endereco : String, valorAluguel : Float) {
 
+    var id : Int = 0
     var matricula : String
     var endereco : String
     var valorAluguel : Float

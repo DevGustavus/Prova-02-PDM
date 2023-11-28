@@ -207,6 +207,20 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/popUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/layoutPopUp">
+
+        <TextView
+            android:id="@+id/textPopUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            style="@style/textBtn"/>
+
+    </LinearLayout>
 
 
 </RelativeLayout>
