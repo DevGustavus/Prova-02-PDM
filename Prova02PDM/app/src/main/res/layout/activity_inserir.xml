@@ -23,13 +23,34 @@
         android:text="Tela de Inserir"/>
 
     <LinearLayout
+        android:id="@+id/layoutBtnLocacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        style="@style/layoutBtn">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/icon_locacao"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Locação"
+            style="@style/textBtn"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/popUpSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        style="@style/layoutPopUp">
 
         <LinearLayout
-            android:id="@+id/layoutBtn1"
+            android:id="@+id/layoutBtnImovel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/layoutBtn">
@@ -48,7 +69,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layoutBtn2"
+            android:id="@+id/layoutBtnProprietario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/layoutBtn">
@@ -67,7 +88,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layoutBtn3"
+            android:id="@+id/layoutBtnInquilino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/layoutBtn">
@@ -83,26 +104,35 @@
                 android:text="Inquilino"
                 style="@style/textBtn"/>
 
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layoutBtn4"
+            android:id="@+id/layoutBtns"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/layoutBtn">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/icon_locacao"/>
-
             <TextView
+                android:id="@+id/btnInserir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Locação"
-                style="@style/textBtn"/>
+                android:text="Inserir"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="20dp"
+                style="@style/btnPopUp"/>
+
+            <TextView
+                android:id="@+id/btnCancelarInsercao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:layout_marginTop="0dp"
+                style="@style/btnPopUp"/>
+
 
         </LinearLayout>
+
 
 
     </LinearLayout>
@@ -117,18 +147,13 @@
         android:src="@drawable/icon_back"/>
 
     <LinearLayout
-        android:id="@+id/popUp1"
+        android:id="@+id/popUpInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="20dp"
-        android:visibility="invisible"
-        android:background="@drawable/background_popup">
+        style="@style/layoutPopUp">
 
         <TextView
-            android:id="@+id/tituloPopUp1"
+            android:id="@+id/tituloPopUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -136,77 +161,18 @@
             android:textSize="30sp"
             android:textColor="@color/white"
             android:padding="10dp"
-            android:text="Inserir Imóvel"/>
+            android:text=""/>
 
         <EditText
-            android:id="@+id/editTextMatricula"
+            android:id="@+id/editTextFirst"
             android:inputType="text"
-            android:hint="Matrícula"
+            android:hint=""
             style="@style/EditTextStyle"/>
 
         <EditText
-            android:id="@+id/editTextEndereco"
+            android:id="@+id/editTextSecond"
             android:inputType="text"
-            android:hint="Endereço"
-            style="@style/EditTextStyle"/>
-
-        <EditText
-            android:id="@+id/editTextAluguel"
-            android:inputType="numberDecimal"
-            android:hint="Valor do Aluguel"
-            style="@style/EditTextStyle"/>
-
-        <TextView
-            android:id="@+id/btnInserirImovel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Inserir"
-            style="@style/btnPopUp"/>
-
-        <TextView
-            android:id="@+id/btnCancelarImovel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancelar"
-            android:textSize="15sp"
-            android:padding="15sp"
-            android:layout_marginBottom="10dp"
-            style="@style/btnPopUp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/popUp2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="20dp"
-        android:visibility="invisible"
-        android:background="@drawable/background_popup">
-
-        <TextView
-            android:id="@+id/tituloPopUp2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textAllCaps="true"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:padding="10dp"
-            android:text="Inserir Proprietário"/>
-
-        <EditText
-            android:id="@+id/editTextCPFprop"
-            android:inputType="text"
-            android:hint="CPF"
-            style="@style/EditTextStyle"/>
-
-        <EditText
-            android:id="@+id/editTextNomeprop"
-            android:inputType="text"
-            android:hint="Nome"
+            android:hint=""
             style="@style/EditTextStyle"/>
 
         <EditText
@@ -215,74 +181,22 @@
             android:hint="Email"
             style="@style/EditTextStyle"/>
 
-        <TextView
-            android:id="@+id/btnInserirProprietario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Inserir"
-            style="@style/btnPopUp"/>
-
-        <TextView
-            android:id="@+id/btnCancelarProprietario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancelar"
-            android:textSize="15sp"
-            android:padding="15sp"
-            android:layout_marginBottom="10dp"
-            style="@style/btnPopUp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/popUp3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="20dp"
-        android:visibility="invisible"
-        android:background="@drawable/background_popup">
-
-        <TextView
-            android:id="@+id/tituloPopUp3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textAllCaps="true"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:padding="10dp"
-            android:text="Inserir Inquilino"/>
 
         <EditText
-            android:id="@+id/editTextCPFinq"
-            android:inputType="text"
-            android:hint="CPF"
-            style="@style/EditTextStyle"/>
-
-        <EditText
-            android:id="@+id/editTextNomeinq"
-            android:inputType="text"
-            android:hint="Nome"
-            style="@style/EditTextStyle"/>
-
-        <EditText
-            android:id="@+id/editTextCaucao"
+            android:id="@+id/editTextFloat"
             android:inputType="numberDecimal"
-            android:hint="Valor do Caução Depositado"
+            android:hint=""
             style="@style/EditTextStyle"/>
 
         <TextView
-            android:id="@+id/btnInserirInquilino"
+            android:id="@+id/btnOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inserir"
+            android:text="Confirmar"
             style="@style/btnPopUp"/>
 
         <TextView
-            android:id="@+id/btnCancelarInquilino"
+            android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancelar"
