@@ -13,6 +13,24 @@
         android:theme="@style/Theme.Prova02PDM"
         tools:targetApi="31">
         <activity
+            android:name=".telas.TxtActivity"
+            android:exported="false" />
+        <activity
+            android:name=".telas.AtualizarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".telas.MostrarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".telas.ExcluirActivity"
+            android:exported="false" />
+        <activity
+            android:name=".telas.InserirActivity"
+            android:exported="false" />
+        <activity
+            android:name=".telas.MenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
