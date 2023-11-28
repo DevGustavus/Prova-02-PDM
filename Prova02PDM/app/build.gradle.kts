@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.prova02pdm"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.prova02pdm"
@@ -33,6 +33,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    viewBinding {
+        enable = true
+    }
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
