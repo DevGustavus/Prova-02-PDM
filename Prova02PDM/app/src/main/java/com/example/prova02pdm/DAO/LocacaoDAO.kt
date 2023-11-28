@@ -17,9 +17,9 @@ class LocacaoDAO(banco : MyDataBaseHelper) {
     fun inserirLocacao(locacao : Locacao): Boolean{
         val db_insercao = this.banco.writableDatabase
         val valores = ContentValues().apply{
-            put("id_proprietario", locacao.proprietario.buscarID())
-            put("id_locacao", locacao.locacao)
-            put("id_inquilino", locacao.inquilino)
+            put("id_proprietario", locacao.proprietario.id)
+            put("id_imovel", locacao.imovel.id)
+            put("id_inquilino", locacao.inquilino.id)
         }
         val confirmaInsercao = db_insercao?.insert("Locacao",  null, valores)
         Log.i("Teste","Inserção: "+confirmaInsercao)
@@ -29,7 +29,4 @@ class LocacaoDAO(banco : MyDataBaseHelper) {
         return true
     }
 
-    fun buscarID() : Int {
-
-    }
 }
