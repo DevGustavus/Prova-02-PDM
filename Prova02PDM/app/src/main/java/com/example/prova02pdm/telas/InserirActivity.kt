@@ -1,5 +1,6 @@
 package com.example.prova02pdm.telas
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import com.example.prova02pdm.R
 import com.example.prova02pdm.banco.MyDataBaseHelper
 import com.example.prova02pdm.classes.Imovel
 import com.example.prova02pdm.classes.Inquilino
+import com.example.prova02pdm.classes.Locacao
 import com.example.prova02pdm.classes.Proprietario
 import com.example.prova02pdm.databinding.ActivityInserirBinding
 
@@ -23,6 +25,10 @@ class InserirActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityInserirBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        window.statusBarColor = getColor(R.color.black)
+
 
         val daoImovel = ImovelDAO(MyDataBaseHelper(applicationContext))
         val daoProp = ProprietarioDAO(MyDataBaseHelper(applicationContext))
@@ -38,8 +44,7 @@ class InserirActivity : AppCompatActivity() {
 
             binding.layoutBtnImovel.setOnClickListener(){
 
-                binding.popUpSelect.isClickable = false
-                binding.popUpSelect.visibility = View.INVISIBLE
+                toggleItens()
 
                 imovelPopUp()
 
@@ -48,22 +53,28 @@ class InserirActivity : AppCompatActivity() {
                     val endereco = binding.editTextSecond.text.toString()
                     val aluguel = binding.editTextFloat.text.toString()
 
-                    imovel = Imovel(matricula, endereco, aluguel.toFloat())
+                    if (matricula == "" || endereco == "" || aluguel == ""){
+                        binding.textPopUp.text = "Preencha todos os campos."
+                        binding.popUp.visibility = View.VISIBLE
+                        binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                        binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                    }else {
+                        imovel = Imovel(matricula, endereco, aluguel.toFloat())
+                        fecharPopUp()
 
-                    fecharPopUp()
-                    binding.popUpSelect.isClickable = true
-                    binding.popUpSelect.visibility = View.VISIBLE
+                        toggleItens()
+                    }
+
                 }
                 binding.btnCancelar.setOnClickListener(){
                     fecharPopUp()
-                    binding.popUpSelect.isClickable = true
-                    binding.popUpSelect.visibility = View.VISIBLE
+
+                    toggleItens()
                 }
             }
             binding.layoutBtnProprietario.setOnClickListener(){
 
-                binding.popUpSelect.isClickable = false
-                binding.popUpSelect.visibility = View.INVISIBLE
+                toggleItens()
 
                 proprietarioPopUp()
 
@@ -72,22 +83,28 @@ class InserirActivity : AppCompatActivity() {
                     val nome = binding.editTextSecond.text.toString()
                     val email = binding.editTextEmail.text.toString()
 
-                    proprietario = Proprietario(cpf, nome, email)
+                    if (cpf == "" || nome == "" || email == ""){
+                        binding.textPopUp.text = "Preencha todos os campos."
+                        binding.popUp.visibility = View.VISIBLE
+                        binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                        binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                    }else {
+                        proprietario = Proprietario(cpf, nome, email)
+                        fecharPopUp()
 
-                    fecharPopUp()
-                    binding.popUpSelect.isClickable = true
-                    binding.popUpSelect.visibility = View.VISIBLE
+                        toggleItens()
+                    }
+
                 }
                 binding.btnCancelar.setOnClickListener(){
                     fecharPopUp()
-                    binding.popUpSelect.isClickable = true
-                    binding.popUpSelect.visibility = View.VISIBLE
+
+                    toggleItens()
                 }
             }
             binding.layoutBtnInquilino.setOnClickListener(){
 
-                binding.popUpSelect.isClickable = false
-                binding.popUpSelect.visibility = View.INVISIBLE
+                toggleItens()
 
                 inquilinoPopUp()
 
@@ -96,52 +113,60 @@ class InserirActivity : AppCompatActivity() {
                     val nome = binding.editTextSecond.text.toString()
                     val caucao = binding.editTextFloat.text.toString()
 
-                    inquilino = Inquilino(cpf, nome, caucao.toFloat())
+                    if (cpf == "" || nome == "" || caucao == ""){
+                        binding.textPopUp.text = "Preencha todos os campos."
+                        binding.popUp.visibility = View.VISIBLE
+                        binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                        binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                    }else {
+                        inquilino = Inquilino(cpf, nome, caucao.toFloat())
+                        fecharPopUp()
 
-                    fecharPopUp()
-                    binding.popUpSelect.isClickable = true
-                    binding.popUpSelect.visibility = View.VISIBLE
+                        toggleItens()
+                    }
                 }
                 binding.btnCancelar.setOnClickListener(){
                     fecharPopUp()
-                    binding.popUpSelect.isClickable = true
-                    binding.popUpSelect.visibility = View.VISIBLE
+
+                    toggleItens()
                 }
             }
             binding.btnInserir.setOnClickListener(){
                 if (imovel == null){
                     binding.textPopUp.text = "Preencha o Imóvel"
                     binding.popUp.visibility = View.VISIBLE
-                    binding.popUp.postDelayed({binding.popUp.visibility = View.INVISIBLE}, 2000)
+                    binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
                     binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
                 }else if (proprietario == null){
                     binding.textPopUp.text = "Preencha o Proprietário"
                     binding.popUp.visibility = View.VISIBLE
-                    binding.popUp.postDelayed({binding.popUp.visibility = View.INVISIBLE}, 2000)
+                    binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
                     binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
                 }else if (inquilino == null){
                 binding.textPopUp.text = "Preencha o Inquilino"
                 binding.popUp.visibility = View.VISIBLE
-                binding.popUp.postDelayed({binding.popUp.visibility = View.INVISIBLE}, 2000)
+                binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
                 binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
                 }else {
                     if (daoImovel.inserirImovel(imovel!!) && daoProp.inserirProprietario(proprietario!!) && daoInqui.inserirInquilino(inquilino!!)) {
                         if (daoLocacao.inserirLocacao()){
                             binding.textPopUp.text = "Inserido com sucesso!!"
                             binding.popUp.visibility = View.VISIBLE
-                            binding.popUp.postDelayed({binding.popUp.visibility = View.INVISIBLE}, 2000)
+                            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
                             binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
-                            binding.popUp.postDelayed({binding.popUpSelect.visibility = View.INVISIBLE}, 2350)
+                            binding.popUp.postDelayed({binding.popUpSelect.visibility = View.GONE}, 2350)
+                            val locacao = Locacao(proprietario!!, imovel!!, inquilino!!)
+                            Log.i("inserir", locacao.toString())
                         }else {
                             binding.textPopUp.text = "Erro ao inserir a locação."
                             binding.popUp.visibility = View.VISIBLE
-                            binding.popUp.postDelayed({binding.popUp.visibility = View.INVISIBLE}, 2000)
+                            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
                             binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
                         }
                     }else {
                         binding.textPopUp.text = "Erro na inserção dos dados."
                         binding.popUp.visibility = View.VISIBLE
-                        binding.popUp.postDelayed({binding.popUp.visibility = View.INVISIBLE}, 2000)
+                        binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
                         binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
                     }
                 }
@@ -150,7 +175,7 @@ class InserirActivity : AppCompatActivity() {
                 imovel = null
                 proprietario = null
                 inquilino = null
-                binding.popUpSelect.visibility = View.INVISIBLE
+                binding.popUpSelect.visibility = View.GONE
             }
         }
 
@@ -162,7 +187,7 @@ class InserirActivity : AppCompatActivity() {
 
     private fun fecharPopUp(){
 
-        binding.popUpInput.visibility = View.INVISIBLE
+        binding.popUpInput.visibility = View.GONE
 
         binding.tituloPopUp.text = ""
         binding.editTextFirst.hint = ""
@@ -172,11 +197,11 @@ class InserirActivity : AppCompatActivity() {
         binding.editTextSecond.text.clear()
         binding.editTextFloat.text.clear()
 
-        if (binding.editTextEmail.visibility == View.INVISIBLE) {
+        if (binding.editTextEmail.visibility == View.GONE) {
             binding.editTextEmail.visibility = View.VISIBLE
         }
 
-        if (binding.editTextFloat.visibility == View.INVISIBLE) {
+        if (binding.editTextFloat.visibility == View.GONE) {
             binding.editTextFloat.visibility = View.VISIBLE
         }
 
@@ -190,7 +215,7 @@ class InserirActivity : AppCompatActivity() {
         binding.tituloPopUp.text = "Inserir Imóvel"
         binding.editTextFirst.hint = "Matrícula"
         binding.editTextSecond.hint = "Endereço"
-        binding.editTextEmail.visibility = View.INVISIBLE
+        binding.editTextEmail.visibility = View.GONE
         binding.editTextFloat.hint = "Valor do Alguel"
 
     }
@@ -202,7 +227,7 @@ class InserirActivity : AppCompatActivity() {
         binding.tituloPopUp.text = "Inserir Proprietário"
         binding.editTextFirst.hint = "CPF"
         binding.editTextSecond.hint = "Nome"
-        binding.editTextFloat.visibility = View.INVISIBLE
+        binding.editTextFloat.visibility = View.GONE
 
     }
 
@@ -213,8 +238,33 @@ class InserirActivity : AppCompatActivity() {
         binding.tituloPopUp.text = "Inserir Inquilino"
         binding.editTextFirst.hint = "CPF"
         binding.editTextSecond.hint = "Nome"
-        binding.editTextEmail.visibility = View.INVISIBLE
+        binding.editTextEmail.visibility = View.GONE
         binding.editTextFloat.hint = "Valor do Caução Depositado"
 
     }
+
+    private fun toggleItens(){
+
+        if(binding.layoutBtnImovel.visibility == View.VISIBLE){
+            binding.layoutBtnImovel.visibility = View.GONE
+        }else {
+            binding.layoutBtnImovel.visibility = View.VISIBLE
+        }
+        if(binding.layoutBtnProprietario.visibility == View.VISIBLE){
+            binding.layoutBtnProprietario.visibility = View.GONE
+        }else {
+            binding.layoutBtnProprietario.visibility = View.VISIBLE
+        }
+        if(binding.layoutBtnInquilino.visibility == View.VISIBLE){
+            binding.layoutBtnInquilino.visibility = View.GONE
+        }else {
+            binding.layoutBtnInquilino.visibility = View.VISIBLE
+        }
+        if(binding.layoutBtns.visibility == View.VISIBLE){
+            binding.layoutBtns.visibility = View.GONE
+        }else {
+            binding.layoutBtns.visibility = View.VISIBLE
+        }
+    }
+
 }

@@ -61,6 +61,7 @@
                 android:src="@drawable/icon_imovel"/>
 
             <TextView
+                android:id="@+id/textImovel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Imóvel"
@@ -80,6 +81,7 @@
                 android:src="@drawable/icon_proprietario"/>
 
             <TextView
+                android:id="@+id/textProprietario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Proprietário"
@@ -99,6 +101,7 @@
                 android:src="@drawable/icon_inquilino"/>
 
             <TextView
+                android:id="@+id/textInquilino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Inquilino"
@@ -188,22 +191,29 @@
             android:hint=""
             style="@style/EditTextStyle"/>
 
-        <TextView
-            android:id="@+id/btnOk"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirmar"
-            style="@style/btnPopUp"/>
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/btnCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancelar"
-            android:textSize="15sp"
-            android:padding="15sp"
-            android:layout_marginBottom="10dp"
-            style="@style/btnPopUp"/>
+            <TextView
+                android:id="@+id/btnOk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirmar"
+                style="@style/btnPopUp"/>
+
+            <TextView
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:textSize="15sp"
+                android:padding="15sp"
+                android:layout_marginBottom="10dp"
+                style="@style/btnPopUp"/>
+        </LinearLayout>
 
     </LinearLayout>
 

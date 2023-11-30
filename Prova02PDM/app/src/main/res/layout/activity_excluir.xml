@@ -1,9 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_imobiliaria"
     tools:context=".telas.ExcluirActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        android:text="Excluir Locações"/>
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/icon_back"/>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/titulo"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:layout_height="350dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listView"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informe o Id da Locação:"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:padding="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:background="@drawable/background_edit_text"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:hint=" Id "
+            android:textColorHint="@color/whitefon"
+            android:inputType="number"/>
+
+        <LinearLayout
+            android:id="@+id/layoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/layoutBtn">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_remove"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="Excluir"
+                style="@style/textBtn"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/popUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/layoutPopUp">
+
+        <TextView
+            android:id="@+id/textPopUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            style="@style/textBtn"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
