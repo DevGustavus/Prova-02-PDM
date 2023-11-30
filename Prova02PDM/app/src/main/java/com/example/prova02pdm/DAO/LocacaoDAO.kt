@@ -63,7 +63,7 @@ class LocacaoDAO(banco : MyDataBaseHelper) {
                     val objProprietario = daoProp.retornarProprietario(id_proprietario)
                     val objImovel = daoImovel.retornarImovel(id_imovel)
                     val objInquilino = daoInqui.retornarInquilino(id_inquilino)
-                    locacao = Locacao(objProprietario,objImovel,objInquilino)
+                    locacao = Locacao(objProprietario!!,objImovel!!,objInquilino!!)
                     break
                 }
             }
