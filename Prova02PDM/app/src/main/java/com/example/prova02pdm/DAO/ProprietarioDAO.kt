@@ -90,4 +90,22 @@ class ProprietarioDAO(banco : MyDataBaseHelper) {
         cursor.close()
         return ultimoId
     }
+
+    fun mostrarProprietario(): List<Proprietario>{
+        val listaProprietarios = ArrayList<Proprietario>()
+        val db_leitura = this.banco.readableDatabase
+        val cursor = db_leitura.rawQuery("select * from Proprietario",null)
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow("id"))
+                val CPF_prop = getString(getColumnIndexOrThrow("CPF_prop"))
+                val nome = getString(getColumnIndexOrThrow("nome"))
+                val email = getString(getColumnIndexOrThrow("email"))
+                android.util.Log.i("Teste","ID: "+id+" - CPF_prop: "+CPF_prop+ " - Nome: "+nome+ " - Email: "+email)
+                listaProprietarios.add(Proprietario(CPF_prop,nome,email))
+            }
+        }
+        cursor.close()
+        return(listaProprietarios)
+    }
 }

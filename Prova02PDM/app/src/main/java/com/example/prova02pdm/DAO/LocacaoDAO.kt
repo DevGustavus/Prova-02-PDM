@@ -72,26 +72,49 @@ class LocacaoDAO(banco : MyDataBaseHelper) {
         return locacao
     }
 
+<<<<<<< HEAD
+    fun mostrarLocacao(): List<Locacao>{
+=======
     fun retornarListaLocacao(): List<String> {
+>>>>>>> ce3351b7c59eb52a107ecd34e56a20a3d3c7d57a
         val daoImovel = ImovelDAO(this.banco)
         val daoProp = ProprietarioDAO(this.banco)
         val daoInqui = InquilinoDAO(this.banco)
 
+<<<<<<< HEAD
+        val listaLocacoes = ArrayList<Locacao>()
+=======
         var lista: List<String> = listOf()
         lateinit var locacao: Locacao
+>>>>>>> ce3351b7c59eb52a107ecd34e56a20a3d3c7d57a
         val db_leitura = this.banco.readableDatabase
         val cursor = db_leitura.rawQuery("select * from Locacao",null)
         with(cursor) {
             while (moveToNext()) {
+<<<<<<< HEAD
+                val id = getInt(getColumnIndexOrThrow("id"))
+                val id_proprietario = getInt(getColumnIndexOrThrow("id_proprietario"))
+                val id_imovel = getInt(getColumnIndexOrThrow("id_imovel"))
+                val id_inquilino = getInt(getColumnIndexOrThrow("id_inquilino"))
+=======
                 val id_BC = getInt(getColumnIndexOrThrow("id"))
                 val id_proprietario = getInt(getColumnIndexOrThrow("id_proprietario"))
                 val id_imovel = getInt(getColumnIndexOrThrow("id_imovel"))
                 val id_inquilino = getInt(getColumnIndexOrThrow("id_inquilino"))
                 android.util.Log.i("Teste","ID: "+id_BC+" - id_proprietario: "+id_proprietario+ " - id_imovel: "+id_imovel+ " - id_inquilino: "+id_inquilino)
+>>>>>>> ce3351b7c59eb52a107ecd34e56a20a3d3c7d57a
 
                 val objProprietario = daoProp.retornarProprietario(id_proprietario)
                 val objImovel = daoImovel.retornarImovel(id_imovel)
                 val objInquilino = daoInqui.retornarInquilino(id_inquilino)
+<<<<<<< HEAD
+                android.util.Log.i("Teste","ID: "+id+" - id_proprietario: "+id_proprietario+ " - id_imovel: "+id_imovel+ " - id_inquilino: "+id_inquilino)
+                listaLocacoes.add(Locacao(objProprietario!!,objImovel!!,objInquilino!!))
+            }
+        }
+        cursor.close()
+        return(listaLocacoes)
+=======
                 locacao = Locacao(objProprietario!!,objImovel!!,objInquilino!!)
                 locacao.id = id_BC
                 lista = lista + locacao.toString()
@@ -100,6 +123,7 @@ class LocacaoDAO(banco : MyDataBaseHelper) {
         }
         cursor.close()
         return lista
+>>>>>>> ce3351b7c59eb52a107ecd34e56a20a3d3c7d57a
     }
 
 }
