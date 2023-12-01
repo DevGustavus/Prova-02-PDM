@@ -56,42 +56,30 @@ class TxtActivity : AppCompatActivity() {
         val daoInqui = InquilinoDAO(this.banco)
         val daoLocacao = LocacaoDAO(this.banco)
 
-        // Caminho do arquivo
-        val caminhoArquivo = "imoveis.txt"
+        //Faz arquivo
+        val arquivo = File(binding.root.context.filesDir, "imoveis.txt")
 
         var listImoveis : List<Imovel> = daoImovel.mostrarImovel()
         var listProprietario : List<Proprietario> = daoProp.mostrarProprietario()
         var listInquilino : List<Inquilino> = daoInqui.mostrarInquilino()
         var listLocacoes : List<Locacao> = daoLocacao.mostrarLocacao()
 
-        val conteudo = "Olá, este é um exemplo de conteúdo para o arquivo de texto!"
-
         // Tenta criar o arquivo e escrever o conteúdo
         try {
-            // Criação do objeto File
-            val arquivo = File(caminhoArquivo)
-
+            //Cria arquivo
+            arquivo.createNewFile()
             // Criação do objeto BufferedWriter
             val escritor = BufferedWriter(FileWriter(arquivo))
 
             // Escrever o conteúdo no arquivo
-            escritor.write("===========================================")
-            for (imovel in listImoveis) {
-                escritor.write("${imovel.toString()}\n")
+            escritor.write("======================================================")
+            for (i in 0 until listLocacoes.size) {
+                escritor.write("\nLocação - Id : ${listLocacoes[i].id}\n")
+                escritor.write("${listImoveis[i]}\n")
+                escritor.write("${listProprietario[i]}\n")
+                escritor.write("${listInquilino[i]}\n")
+                escritor.write("======================================================")
             }
-            escritor.write("\n")
-            for (proprietario in listProprietario) {
-                escritor.write("${proprietario.toString()}\n")
-            }
-            escritor.write("\n")
-            for (inquilino in listInquilino) {
-                escritor.write("${inquilino.toString()}\n")
-            }
-            escritor.write("\n")
-            for (locacao in listLocacoes) {
-                escritor.write("${locacao.toString()}\n")
-            }
-            escritor.write("===========================================")
 
             // Fechar o BufferedWriter para liberar os recursos
             escritor.close()
@@ -104,26 +92,15 @@ class TxtActivity : AppCompatActivity() {
     }
 
     fun mostrarTxt() {
-        // Caminho do arquivo
-        val caminhoArquivo = "imoveis.txt"
-
         try {
-            // Criação do objeto File
-            val arquivo = File(caminhoArquivo)
+            val arquivo = File(binding.root.context.filesDir, "imoveis.txt")
 
-            // Criação do objeto BufferedReader
-            val leitor = BufferedReader(FileReader(arquivo))
+            val reader = arquivo.bufferedReader()
+            val leitura = reader.readLines()
 
-            // Variável para armazenar cada linha do arquivo
-            var linha: String?
-
-            // Loop para ler cada linha do arquivo e mostrar no Log
-            while (leitor.readLine().also { linha = it } != null) {
-                android.util.Log.i("ConteudoArquivo", linha!!)
+            for (line in leitura) {
+                android.util.Log.i("BC Dados",line)
             }
-
-            // Fechar o BufferedReader para liberar os recursos
-            leitor.close()
 
         } catch (e: Exception) {
             android.util.Log.i("Erro", "Ocorreu um erro ao ler o arquivo: ${e.message}")
