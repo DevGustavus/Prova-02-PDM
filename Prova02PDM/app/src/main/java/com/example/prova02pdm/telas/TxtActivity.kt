@@ -13,8 +13,10 @@ import com.example.prova02pdm.classes.Inquilino
 import com.example.prova02pdm.classes.Locacao
 import com.example.prova02pdm.classes.Proprietario
 import com.example.prova02pdm.databinding.ActivityTxtBinding
+import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.File
+import java.io.FileReader
 import java.io.FileWriter
 
 class TxtActivity : AppCompatActivity() {
@@ -22,7 +24,7 @@ class TxtActivity : AppCompatActivity() {
     var banco : MyDataBaseHelper
 
     init {
-        this.banco = banco
+        banco = MyDataBaseHelper(this)
     }
 
     private lateinit var binding: ActivityTxtBinding
@@ -36,11 +38,11 @@ class TxtActivity : AppCompatActivity() {
 
         //CRIAR TXT
         binding.btn1.setOnClickListener(){
-
+            escreverTxt()
         }
         //MOSTRAR TXT
         binding.btn2.setOnClickListener(){
-
+            mostrarTxt()
         }
         binding.btnBack.setOnClickListener(){
             finish()
@@ -98,6 +100,33 @@ class TxtActivity : AppCompatActivity() {
 
         } catch (e: Exception) {
             android.util.Log.i("Erro","Ocorreu um erro ao criar o arquivo: ${e.message}")
+        }
+    }
+
+    fun mostrarTxt() {
+        // Caminho do arquivo
+        val caminhoArquivo = "imoveis.txt"
+
+        try {
+            // Criação do objeto File
+            val arquivo = File(caminhoArquivo)
+
+            // Criação do objeto BufferedReader
+            val leitor = BufferedReader(FileReader(arquivo))
+
+            // Variável para armazenar cada linha do arquivo
+            var linha: String?
+
+            // Loop para ler cada linha do arquivo e mostrar no Log
+            while (leitor.readLine().also { linha = it } != null) {
+                android.util.Log.i("ConteudoArquivo", linha!!)
+            }
+
+            // Fechar o BufferedReader para liberar os recursos
+            leitor.close()
+
+        } catch (e: Exception) {
+            android.util.Log.i("Erro", "Ocorreu um erro ao ler o arquivo: ${e.message}")
         }
     }
 }
