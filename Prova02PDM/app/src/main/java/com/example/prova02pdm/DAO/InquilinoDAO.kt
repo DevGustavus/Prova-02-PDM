@@ -68,6 +68,7 @@ class InquilinoDAO(banco : MyDataBaseHelper) {
                 if(id == id_BC){
                     android.util.Log.i("Teste","ID: "+id_BC+" - CPF_inq: "+CPF_inq+ " - Nome: "+nome+ " - Valor_depositado: "+Valor_depositado)
                     inquilino = Inquilino(CPF_inq,nome,Valor_depositado)
+                    inquilino!!.id - id_BC
                     break
                 }
             }

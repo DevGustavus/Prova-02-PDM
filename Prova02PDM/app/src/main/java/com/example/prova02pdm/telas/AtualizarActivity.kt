@@ -1,9 +1,11 @@
 package com.example.prova02pdm.telas
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import com.example.prova02pdm.DAO.ImovelDAO
 import com.example.prova02pdm.DAO.InquilinoDAO
@@ -26,20 +28,22 @@ class AtualizarActivity : AppCompatActivity() {
         binding = ActivityAtualizarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        window.statusBarColor = getColor(R.color.black)
-
-        val listView = binding.listView
-
-        val listaDeItens = listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 2", "Item 3", "Item 4", "Item 2", "Item 3", "Item 4", "Item 2", "Item 3", "Item 4", "Item 2", "Item 3", "Item 4"    )
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaDeItens)
-
-        listView.adapter = adapter
-
         val daoImovel = ImovelDAO(MyDataBaseHelper(applicationContext))
         val daoProp = ProprietarioDAO(MyDataBaseHelper(applicationContext))
         val daoInqui = InquilinoDAO(MyDataBaseHelper(applicationContext))
         val daoLocacao = LocacaoDAO(MyDataBaseHelper(applicationContext))
+
+        window.statusBarColor = getColor(R.color.black)
+
+        val listView = binding.listView
+
+        var lista = daoLocacao.retornarListaLocacao()
+
+        var adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lista)
+
+        listView.adapter = adapter
+
+
 
         var id: Int = 0
 
@@ -49,17 +53,50 @@ class AtualizarActivity : AppCompatActivity() {
 
         binding.layoutBtn.setOnClickListener(){
 
-            id = binding.editTextId.text.toString().toInt()
+            fecharTeclado()
 
-            binding.popUpSelect.visibility = View.VISIBLE
+            if (binding.editTextId.text.toString() != ""){
+                id = binding.editTextId.text.toString().toInt()
+                try {
+                    imovel = daoImovel.retornarImovel(id)
+                    proprietario = daoProp.retornarProprietario(id)
+                    inquilino = daoInqui.retornarInquilino(id)
+                    if (imovel != null && proprietario != null && inquilino != null){
+                        imovel!!.id = id
+                        proprietario!!.id = id
+                        inquilino!!.id = id
+                        binding.popUpSelect.visibility = View.VISIBLE
+                    }else{
+                        binding.textPopUp.text = "Id inválido!"
+                        binding.popUp.visibility = View.VISIBLE
+                        binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                        binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                    }
+                }catch (e: Exception){
+                    binding.textPopUp.text = "Id inválido!"
+                    binding.popUp.visibility = View.VISIBLE
+                    binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                    binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                }
+            }else {
+                binding.textPopUp.text = "Preencha o campo."
+                binding.popUp.visibility = View.VISIBLE
+                binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+            }
+
+
 
             binding.layoutBtnImovel.setOnClickListener(){
 
                 toggleItens()
 
-                imovelPopUp(imovel)
+                imovelPopUp(imovel!!)
 
                 binding.btnOk.setOnClickListener(){
+
+                    fecharTeclado()
+
                     val matricula = binding.editTextFirst.text.toString()
                     val endereco = binding.editTextSecond.text.toString()
                     val aluguel = binding.editTextFloat.text.toString()
@@ -70,16 +107,34 @@ class AtualizarActivity : AppCompatActivity() {
                         binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
                         binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
                     }else {
-                        imovel = Imovel(matricula, endereco, aluguel.toFloat())
-                        fecharPopUp()
+                        try {
+                            imovel = Imovel(matricula, endereco, aluguel.toFloat())
+                            imovel!!.id = id
+                            daoImovel.atualizarImovel(imovel!!)
+                            fecharPopUp()
+                            toggleItens()
 
-                        toggleItens()
+                            lista = daoLocacao.retornarListaLocacao()
+                            adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lista)
+                            listView.adapter = adapter
+
+                            binding.textPopUp.text = "Atualizado com sucesso!"
+                            binding.popUp.visibility = View.VISIBLE
+                            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                            binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                        }catch (e: Exception){
+                            binding.textPopUp.text = "Erro ao atualizar.\nTente novamente."
+                            binding.popUp.visibility = View.VISIBLE
+                            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                            binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                        }
+
                     }
 
                 }
                 binding.btnCancelar.setOnClickListener(){
+                    fecharTeclado()
                     fecharPopUp()
-
                     toggleItens()
                 }
             }
@@ -87,9 +142,12 @@ class AtualizarActivity : AppCompatActivity() {
 
                 toggleItens()
 
-                proprietarioPopUp(proprietario)
+                proprietarioPopUp(proprietario!!)
 
                 binding.btnOk.setOnClickListener(){
+
+                    fecharTeclado()
+
                     val cpf = binding.editTextFirst.text.toString()
                     val nome = binding.editTextSecond.text.toString()
                     val email = binding.editTextEmail.text.toString()
@@ -100,16 +158,34 @@ class AtualizarActivity : AppCompatActivity() {
                         binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
                         binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
                     }else {
-                        proprietario = Proprietario(cpf, nome, email)
-                        fecharPopUp()
+                        try {
+                            proprietario = Proprietario(cpf, nome, email)
+                            proprietario!!.id = id
+                            daoProp.atualizarProprietario(proprietario!!)
+                            fecharPopUp()
+                            toggleItens()
 
-                        toggleItens()
+                            lista = daoLocacao.retornarListaLocacao()
+                            adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lista)
+                            listView.adapter = adapter
+
+                            binding.textPopUp.text = "Atualizado com sucesso!"
+                            binding.popUp.visibility = View.VISIBLE
+                            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                            binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                        }catch (e: Exception){
+                            binding.textPopUp.text = "Erro ao atualizar.\nTente novamente."
+                            binding.popUp.visibility = View.VISIBLE
+                            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                            binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                        }
+
                     }
 
                 }
                 binding.btnCancelar.setOnClickListener(){
+                    fecharTeclado()
                     fecharPopUp()
-
                     toggleItens()
                 }
             }
@@ -117,9 +193,12 @@ class AtualizarActivity : AppCompatActivity() {
 
                 toggleItens()
 
-                inquilinoPopUp(inquilino)
+                inquilinoPopUp(inquilino!!)
 
                 binding.btnOk.setOnClickListener(){
+
+                    fecharTeclado()
+
                     val cpf = binding.editTextFirst.text.toString()
                     val nome = binding.editTextSecond.text.toString()
                     val caucao = binding.editTextFloat.text.toString()
@@ -130,15 +209,34 @@ class AtualizarActivity : AppCompatActivity() {
                         binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
                         binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
                     }else {
-                        inquilino = Inquilino(cpf, nome, caucao.toFloat())
-                        fecharPopUp()
 
-                        toggleItens()
+                        try {
+                            inquilino = Inquilino(cpf, nome, caucao.toFloat())
+                            inquilino!!.id = id
+                            daoInqui.atualizarInquilino(inquilino!!)
+                            fecharPopUp()
+                            toggleItens()
+
+                            lista = daoLocacao.retornarListaLocacao()
+                            adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lista)
+                            listView.adapter = adapter
+
+                            binding.textPopUp.text = "Atualizado com sucesso!"
+                            binding.popUp.visibility = View.VISIBLE
+                            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                            binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                        }catch (e: Exception){
+                            binding.textPopUp.text = "Erro ao atualizar.\nTente novamente."
+                            binding.popUp.visibility = View.VISIBLE
+                            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+                            binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+                        }
+
                     }
                 }
                 binding.btnCancelar.setOnClickListener(){
+                    fecharTeclado()
                     fecharPopUp()
-
                     toggleItens()
                 }
             }
@@ -245,6 +343,14 @@ class AtualizarActivity : AppCompatActivity() {
             binding.layoutBtns.visibility = View.GONE
         }else {
             binding.layoutBtns.visibility = View.VISIBLE
+        }
+    }
+
+    private fun fecharTeclado() {
+        val view: View? = currentFocus
+        if (view != null) {
+            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }
