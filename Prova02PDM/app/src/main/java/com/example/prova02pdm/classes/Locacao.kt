@@ -13,6 +13,6 @@ class Locacao(proprietario : Proprietario, imovel : Imovel, inquilino : Inquilin
     }
 
     override fun toString(): String {
-        return "Locação Id = ${this.id}\n Proprietário = ${proprietario.nome}\n Imóvel = ${imovel.endereco}\n Inquilino = ${inquilino.nome}"
+        return "Locação Id : ${this.id}\n   Proprietário : ${proprietario.nome}\n   Imóvel : ${imovel.endereco}\n   Inquilino : ${inquilino.nome}"
     }
 }

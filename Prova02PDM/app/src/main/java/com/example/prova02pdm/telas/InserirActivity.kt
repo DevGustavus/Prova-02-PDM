@@ -1,10 +1,12 @@
 package com.example.prova02pdm.telas
 
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.example.prova02pdm.DAO.ImovelDAO
 import com.example.prova02pdm.DAO.InquilinoDAO
 import com.example.prova02pdm.DAO.LocacaoDAO
@@ -49,6 +51,9 @@ class InserirActivity : AppCompatActivity() {
                 imovelPopUp()
 
                 binding.btnOk.setOnClickListener(){
+
+                    fecharTeclado()
+
                     val matricula = binding.editTextFirst.text.toString()
                     val endereco = binding.editTextSecond.text.toString()
                     val aluguel = binding.editTextFloat.text.toString()
@@ -67,8 +72,8 @@ class InserirActivity : AppCompatActivity() {
 
                 }
                 binding.btnCancelar.setOnClickListener(){
+                    fecharTeclado()
                     fecharPopUp()
-
                     toggleItens()
                 }
             }
@@ -79,6 +84,9 @@ class InserirActivity : AppCompatActivity() {
                 proprietarioPopUp()
 
                 binding.btnOk.setOnClickListener(){
+
+                    fecharTeclado()
+
                     val cpf = binding.editTextFirst.text.toString()
                     val nome = binding.editTextSecond.text.toString()
                     val email = binding.editTextEmail.text.toString()
@@ -97,8 +105,8 @@ class InserirActivity : AppCompatActivity() {
 
                 }
                 binding.btnCancelar.setOnClickListener(){
+                    fecharTeclado()
                     fecharPopUp()
-
                     toggleItens()
                 }
             }
@@ -109,6 +117,9 @@ class InserirActivity : AppCompatActivity() {
                 inquilinoPopUp()
 
                 binding.btnOk.setOnClickListener(){
+
+                    fecharTeclado()
+
                     val cpf = binding.editTextFirst.text.toString()
                     val nome = binding.editTextSecond.text.toString()
                     val caucao = binding.editTextFloat.text.toString()
@@ -126,8 +137,8 @@ class InserirActivity : AppCompatActivity() {
                     }
                 }
                 binding.btnCancelar.setOnClickListener(){
+                    fecharTeclado()
                     fecharPopUp()
-
                     toggleItens()
                 }
             }
@@ -264,6 +275,14 @@ class InserirActivity : AppCompatActivity() {
             binding.layoutBtns.visibility = View.GONE
         }else {
             binding.layoutBtns.visibility = View.VISIBLE
+        }
+    }
+
+    private fun fecharTeclado() {
+        val view: View? = currentFocus
+        if (view != null) {
+            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 

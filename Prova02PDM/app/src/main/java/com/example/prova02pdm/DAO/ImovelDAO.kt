@@ -67,6 +67,7 @@ class ImovelDAO(banco : MyDataBaseHelper) {
                 if(id == id_BC){
                     android.util.Log.i("Teste", "ID: "+id_BC+" - Matricula: "+matricula+ " - Endereco: "+endereco+ " - ValorAluguel: "+valorAluguel)
                     imovel = Imovel(matricula,endereco,valorAluguel)
+                    imovel!!.id = id_BC
                     break
                 }
             }

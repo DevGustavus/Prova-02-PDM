@@ -59,7 +59,7 @@ class ProprietarioDAO(banco : MyDataBaseHelper) {
         with(cursor) {
             while (moveToNext()) {
                 val id_BC = getInt(getColumnIndexOrThrow("id"))
-                val CPF_prop = getString(getColumnIndexOrThrow("CPF_inq"))
+                val CPF_prop = getString(getColumnIndexOrThrow("CPF_prop"))
                 val nome = getString(getColumnIndexOrThrow("nome"))
                 val email = getString(getColumnIndexOrThrow("email"))
                 android.util.Log.i("Teste","ID: "+id_BC+" - CPF_prop: "+CPF_prop+ " - Nome: "+nome+ " - Email: "+email)
@@ -67,6 +67,7 @@ class ProprietarioDAO(banco : MyDataBaseHelper) {
                 if(id == id_BC){
                     android.util.Log.i("Teste","ID: "+id_BC+" - CPF_prop: "+CPF_prop+ " - Nome: "+nome+ " - Email: "+email)
                     proprietario = Proprietario(CPF_prop,nome,email)
+                    proprietario!!.id = id_BC
                     break
                 }
             }

@@ -17,12 +17,14 @@
             android:exported="false" />
         <activity
             android:name=".telas.AtualizarActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".telas.MostrarActivity"
             android:exported="false" />
         <activity
             android:name=".telas.ExcluirActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".telas.InserirActivity"
