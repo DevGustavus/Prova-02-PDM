@@ -6,26 +6,29 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icon_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.Prova02PDM"
         tools:targetApi="31">
+        <activity
+            android:name=".telas.AboutActivity"
+            android:exported="false" />
         <activity
             android:name=".telas.TxtActivity"
             android:exported="false" />
         <activity
             android:name=".telas.AtualizarActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".telas.MostrarActivity"
             android:exported="false" />
         <activity
             android:name=".telas.ExcluirActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".telas.InserirActivity"
             android:exported="false" />

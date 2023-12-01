@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Prova02PDM</string>
+    <string name="about">Este app foi desenvolvido para controlar locações. As locações são constituídas de um imóvel, o proprietário do imóvel e um inquilino para o imóvel.\n\nAo inserir uma locação, terá que inserir, obrigatoriamente, os dados necessários para a mesma.\nEm atualizar, você consegue alterar as informações dos dados da locação.\nEm excluir, você exclui a locação inteira, levando junto todos os dados.\n\nA atualização e exclusão são feitas a partir do Id.\n\nPor fim temos o arquivo TXT que é gerado a partir dos dados da locação fornecidos e podem ser visualizados no Log do app.</string>
 </resources>
