@@ -16,11 +16,8 @@ class MenuActivity : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Verificar se a versão do Android é igual ou superior a Lollipop (API 21)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // Definir a cor desejada para a barra de notificação
-            window.statusBarColor = getColor(R.color.black) // Substitua "sua_cor" pelo ID real da sua cor
-        }
+        window.statusBarColor = getColor(R.color.black) // Substitua "sua_cor" pelo ID real da sua cor
+
 
         binding.layoutBtn1.setOnClickListener(){
             val intent = Intent(this, InserirActivity::class.java)
@@ -40,6 +37,10 @@ class MenuActivity : AppCompatActivity() {
         }
         binding.layoutBtn5.setOnClickListener(){
             val intent = Intent(this, TxtActivity::class.java)
+            startActivity(intent)
+        }
+        binding.layoutBtn6.setOnClickListener(){
+            val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
         }
     }

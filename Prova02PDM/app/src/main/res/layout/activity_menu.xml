@@ -153,6 +153,25 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/layoutBtn6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/layoutBtn">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_about"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sobre o App"
+                    style="@style/textBtn"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

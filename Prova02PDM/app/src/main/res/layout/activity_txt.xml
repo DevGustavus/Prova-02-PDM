@@ -45,7 +45,8 @@
 
             <ImageView
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:src="@drawable/icon_save"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -63,7 +64,8 @@
 
             <ImageView
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:src="@drawable/icon_view_text"/>
 
             <TextView
                 android:layout_width="wrap_content"
