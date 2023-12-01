@@ -72,4 +72,30 @@ class LocacaoDAO(banco : MyDataBaseHelper) {
         return locacao
     }
 
+    fun mostrarLocacao(): List<Locacao>{
+        val daoImovel = ImovelDAO(this.banco)
+        val daoProp = ProprietarioDAO(this.banco)
+        val daoInqui = InquilinoDAO(this.banco)
+
+        val listaLocacoes = ArrayList<Locacao>()
+        val db_leitura = this.banco.readableDatabase
+        val cursor = db_leitura.rawQuery("select * from Locacao",null)
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow("id"))
+                val id_proprietario = getInt(getColumnIndexOrThrow("id_proprietario"))
+                val id_imovel = getInt(getColumnIndexOrThrow("id_imovel"))
+                val id_inquilino = getInt(getColumnIndexOrThrow("id_inquilino"))
+
+                val objProprietario = daoProp.retornarProprietario(id_proprietario)
+                val objImovel = daoImovel.retornarImovel(id_imovel)
+                val objInquilino = daoInqui.retornarInquilino(id_inquilino)
+                android.util.Log.i("Teste","ID: "+id+" - id_proprietario: "+id_proprietario+ " - id_imovel: "+id_imovel+ " - id_inquilino: "+id_inquilino)
+                listaLocacoes.add(Locacao(objProprietario!!,objImovel!!,objInquilino!!))
+            }
+        }
+        cursor.close()
+        return(listaLocacoes)
+    }
+
 }

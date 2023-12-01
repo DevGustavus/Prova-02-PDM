@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.util.Log
 import com.example.prova02pdm.banco.MyDataBaseHelper
 import com.example.prova02pdm.classes.Imovel
+import com.example.prova02pdm.classes.Inquilino
 import com.example.prova02pdm.classes.Proprietario
 
 class ImovelDAO(banco : MyDataBaseHelper) {
@@ -88,5 +89,23 @@ class ImovelDAO(banco : MyDataBaseHelper) {
         }
         cursor.close()
         return ultimoId
+    }
+
+    fun mostrarImovel(): List<Imovel>{
+        val listaImoveis = ArrayList<Imovel>()
+        val db_leitura = this.banco.readableDatabase
+        val cursor = db_leitura.rawQuery("select * from Imovel",null)
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow("id"))
+                val matricula = getString(getColumnIndexOrThrow("matricula"))
+                val endereco = getString(getColumnIndexOrThrow("endereco"))
+                val valorAluguel = getFloat(getColumnIndexOrThrow("valorAluguel"))
+                android.util.Log.i("Teste","ID: "+id+" - matricula: "+matricula+ " - endereco: "+endereco+ " - valorAluguel: "+valorAluguel)
+                listaImoveis.add(Imovel(matricula,endereco,valorAluguel))
+            }
+        }
+        cursor.close()
+        return(listaImoveis)
     }
 }
