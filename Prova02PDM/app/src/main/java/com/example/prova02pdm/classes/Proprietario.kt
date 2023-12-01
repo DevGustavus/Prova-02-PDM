@@ -14,6 +14,6 @@ class Proprietario(CPF_prop : String, nome : String, email : String) {
     }
 
     override fun toString(): String {
-        return "Proprietario(CPF_prop='$CPF_prop', nome='$nome', email='$email')"
+        return "    Proprietário\n        CPF : $CPF_prop\n        Nome : $nome\n        Email : $email"
     }
 }

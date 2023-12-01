@@ -2,6 +2,7 @@ package com.example.prova02pdm.telas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.prova02pdm.DAO.ImovelDAO
 import com.example.prova02pdm.DAO.InquilinoDAO
 import com.example.prova02pdm.DAO.LocacaoDAO
@@ -44,6 +45,9 @@ class TxtActivity : AppCompatActivity() {
         binding.btn2.setOnClickListener(){
             mostrarTxt()
         }
+        binding.btn3.setOnClickListener(){
+            mostrarTxtTela()
+        }
         binding.btnBack.setOnClickListener(){
             finish()
         }
@@ -85,25 +89,74 @@ class TxtActivity : AppCompatActivity() {
             escritor.close()
 
             android.util.Log.i("Teste","Arquivo criado com sucesso!")
+            binding.textPopUp.text = "Arquivo criado com sucesso!"
+            binding.popUp.visibility = View.VISIBLE
+            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+            binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
 
         } catch (e: Exception) {
             android.util.Log.i("Erro","Ocorreu um erro ao criar o arquivo: ${e.message}")
+            binding.textPopUp.text = "Erro ao criar o arquivo."
+            binding.popUp.visibility = View.VISIBLE
+            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+            binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
         }
     }
 
-    fun mostrarTxt() {
+    private fun mostrarTxt() {
         try {
             val arquivo = File(binding.root.context.filesDir, "imoveis.txt")
 
             val reader = arquivo.bufferedReader()
             val leitura = reader.readLines()
+            var dados = ""
 
             for (line in leitura) {
-                android.util.Log.i("BC Dados",line)
+                //android.util.Log.i("BC Dados",line)
+                dados += line + "\n"
+            }
+            android.util.Log.i("BC Dados",dados)
+
+        } catch (e: Exception) {
+            android.util.Log.i("Erro", "Ocorreu um erro ao ler o arquivo: ${e.message}")
+            binding.textPopUp.text = "Erro ao ler o arquivo."
+            binding.popUp.visibility = View.VISIBLE
+            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+            binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
+        }
+    }
+
+    private fun mostrarTxtTela() {
+        try {
+            val arquivo = File(binding.root.context.filesDir, "imoveis.txt")
+
+            val reader = arquivo.bufferedReader()
+            val leitura = reader.readLines()
+            var dados = ""
+
+            for (line in leitura) {
+                //android.util.Log.i("BC Dados",line)
+                dados += line + "\n"
+            }
+            binding.textPopUp.visibility = View.GONE
+            binding.scrolldados.visibility = View.VISIBLE
+            binding.textPopUpdados.text = dados
+            binding.popUp.visibility = View.VISIBLE
+            binding.btnBackPopUp.visibility = View.VISIBLE
+            binding.btnBackPopUp.setOnClickListener(){
+                binding.scrolldados.visibility = View.GONE
+                binding.textPopUp.visibility = View.VISIBLE
+                binding.textPopUp.text = ""
+                binding.popUp.visibility = View.GONE
+                binding.btnBackPopUp.visibility = View.GONE
             }
 
         } catch (e: Exception) {
             android.util.Log.i("Erro", "Ocorreu um erro ao ler o arquivo: ${e.message}")
+            binding.textPopUp.text = "Erro ao ler o arquivo."
+            binding.popUp.visibility = View.VISIBLE
+            binding.popUp.postDelayed({binding.popUp.visibility = View.GONE}, 2000)
+            binding.popUp.postDelayed({binding.textPopUp.text = ""}, 2005)
         }
     }
 }

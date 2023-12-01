@@ -14,6 +14,6 @@ class Imovel(matricula : String, endereco : String, valorAluguel : Float) {
     }
 
     override fun toString(): String {
-        return "Imovel(matricula='$matricula', endereco='$endereco', valorAluguel=$valorAluguel)"
+        return "    Imóvel\n        Matricula : $matricula\n        Endereco : $endereco\n        Aluguel : R$$valorAluguel"
     }
 }

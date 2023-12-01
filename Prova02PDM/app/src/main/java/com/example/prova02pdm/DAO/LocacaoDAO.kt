@@ -91,7 +91,9 @@ class LocacaoDAO(banco : MyDataBaseHelper) {
                 val objImovel = daoImovel.retornarImovel(id_imovel)
                 val objInquilino = daoInqui.retornarInquilino(id_inquilino)
                 android.util.Log.i("Teste","ID: "+id_BC+" - id_proprietario: "+id_proprietario+ " - id_imovel: "+id_imovel+ " - id_inquilino: "+id_inquilino)
-                listaLocacoes.add(Locacao(objProprietario!!,objImovel!!,objInquilino!!))
+                val locacao = Locacao(objProprietario!!,objImovel!!,objInquilino!!)
+                locacao.id = id_BC
+                listaLocacoes.add(locacao)
             }
         }
         cursor.close()

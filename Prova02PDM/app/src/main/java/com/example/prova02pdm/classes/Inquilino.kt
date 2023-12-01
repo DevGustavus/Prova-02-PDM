@@ -14,6 +14,6 @@ class Inquilino(CPF_inq : String, nome : String, Valor_depositado : Float){
     }
 
     override fun toString(): String {
-        return "Inquilino(CPF_inq='$CPF_inq', nome='$nome', Valor_depositado=$Valor_depositado)"
+        return "    Inquilino\n        CPF : $CPF_inq\n        Nome : $nome\n        Caução : R$$Valor_depositado"
     }
 }

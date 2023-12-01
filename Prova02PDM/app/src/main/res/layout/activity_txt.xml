@@ -57,6 +57,25 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/layoutBtn">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_view_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mostrar dados\nna tela"
+                style="@style/textBtn"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,12 +102,37 @@
         android:layout_height="wrap_content"
         style="@style/layoutPopUp">
 
+        <ImageView
+            android:id="@+id/btnBackPopUp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_back"
+            android:visibility="gone"/>
+
+        <ScrollView
+            android:id="@+id/scrolldados"
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textPopUpdados"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="10sp"
+                style="@style/textBtn"/>
+
+        </ScrollView>
+
         <TextView
             android:id="@+id/textPopUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             style="@style/textBtn"/>
+
 
     </LinearLayout>
 
