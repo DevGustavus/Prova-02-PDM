@@ -3,6 +3,21 @@
 ## 📖 About the project
 This project is part of the Mobile Device Programming (PDM) course in the 4th semester at IFTM. Therefore, this project serves as the 2nd evaluative activity (exam) for PDM. <br>
 The project idea is to perform basic property rentals through a mobile application. The app has multiple screens to facilitate user interaction. Additionally, as stated in the exam instructions, we are required to create three classes: Proprietario (Owner), Imoveis (Properties), and Inquilino (Tenant).
+At the end, the app can create a text file to list all the information present in the app.
+
+### App Screens
+
+| ![Menu](Doc/README_assets/pdm2_main.png) | ![PlayMenu](Doc/README_assets/pdm2_menu.png) | ![Login](Doc/README_assets/pdm2_inserir.png) |
+|:---:|:---:|:---:|
+| **Initial screen** | **Menu** | **Insert** |
+
+| ![Register](Doc/README_assets/pdm2_excluir.png) | ![Account](Doc/README_assets/pdm2_atualizar.png) | ![AlterAccount](Doc/README_assets/pdm_mostrar.png) |
+|:---:|:---:|:---:|
+| **Exclude** | **Update** | **Show items** |
+
+| ![Register](Doc/README_assets/pdm_txt.png) | ![Account](Doc/README_assets/pdm2_about.png) |
+|:---:|:---:|
+| **Create txt** | **About** |
 
 ## 🦾 Technologies used
 <div style="display: flex;">
